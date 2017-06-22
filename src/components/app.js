@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import { Panel } from 'react-bootstrap';
+
+import RecipeList from "./recipeList";
 
 export default class App extends Component {
   render() {
     return (
-      <div>React simple starter</div>
+      <Panel>
+        <RecipeList />
+      </Panel>
     );
   }
 }
