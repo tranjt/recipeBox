@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Modal, Button, ButtonToolbar, FormGroup, FormControl, ControlLabel  } from "react-bootstrap";
+import { connect } from "react-redux";
+import { editRecipe } from "../actions/index";
 
 class RecipeEdit extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             showModal: false,
             title: this.props.recipe.title,
@@ -21,23 +22,25 @@ class RecipeEdit extends Component {
          this.setState({ showModal: true });
     }
 
-    handleTitleEdit(event) {
-        
+    handleTitleEdit(event) {        
         this.setState({
             title: event.target.value
         });
     }
 
-    handleIngredientsEdit(event) {
-        
+    handleIngredientsEdit(event) {        
         this.setState({
             ingredients: event.target.value
         });
     }
+
     handleSubmit(event) {
-        event.preventDefault();
-        console.log(this.state.title);
-        console.log(this.state.ingredients);
+        event.preventDefault();       
+        this.props.editRecipe({
+            id: this.props.recipe.id,
+            title: this.state.title,
+            ingredients: this.state.ingredients.split(",")
+        });
         this.closeModal();
     }
 
@@ -81,4 +84,4 @@ class RecipeEdit extends Component {
     }
 }
 
-export default RecipeEdit;
+export default connect(null, { editRecipe })(RecipeEdit);

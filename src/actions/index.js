@@ -7,8 +7,7 @@ export const DELETE_RECIPE = "EDIT_RECIPE";
 
 
 
-export function addRecipes() {        
-    
+export function addRecipes() {            
     return {
         type: ADD_RECIPES,
         payload: getRecipes()
@@ -24,6 +23,7 @@ export function addRecipe(recipe) {
 }
 
 export function editRecipe(recipe) {
+    console.log(recipe);
     return {
         type: EDIT_RECIPE,
         payload: recipe

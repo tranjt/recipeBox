@@ -11,13 +11,13 @@ export default function(state = INITIAL_STATE, action) {
             };
         case ADD_RECIPE:
             return  {
-                recipes: [...state.recipes, action.payload.recipe]
+                recipes: [...state.recipes, action.payload]
             };   
         case EDIT_RECIPE:
             return {
-                recipes: state.recipe.map(recipe => {
-                    if (recipe.id === action.payload.recipe.id) {
-                        return action.payload.recipe;
+                recipes: state.recipes.map(recipe => {                    
+                    if (recipe.id === action.payload.id) {
+                        return action.payload;
                     }
                     else return recipe;
                 })
