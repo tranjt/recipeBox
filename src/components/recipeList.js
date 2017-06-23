@@ -1,33 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Accordion, Panel, ListGroup, ListGroupItem, ButtonToolbar, Button  } from 'react-bootstrap';
+import { addRecipes } from "../actions/index";
 import RecipeEdit from "./recipeEdit";
 
 class RecipeList extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            recipes: [
-                {   id: 1,
-                    title: "Pie", 
-                    ingredients: ["Butter", "flour", "egg", "bacon"]
-                },
-                {   
-                    id: 2,
-                    title: "Cake", 
-                    ingredients: ["Butter", "flour", "egg", "Jam"]
-                },
-                {
-                    id: 3,
-                    title: "Roast Chicken", 
-                    ingredients: ["Butter", "sugar", "salt", "Chicken"]
-                }
-            ]
-        };
-    }    
+    componentWillMount() {
+        this.props.addRecipes();
+    }
    
-    renderRecipes() {        
-        return this.state.recipes.map(recipe => {
+    renderRecipes() {                
+        return this.props.recipes.map(recipe => {
             return (
                 <Panel collapsible header={recipe.title} eventKey={recipe.title} bsStyle="success" key={recipe.title} >                        
                     <ListGroup fill>
@@ -61,4 +45,8 @@ class RecipeList extends Component {
     }
 }
 
-export default RecipeList;
+function mapStateToProps(state) {    
+    return { recipes: state.recipesList.recipes };
+}
+
+export default connect(mapStateToProps, { addRecipes })(RecipeList);
