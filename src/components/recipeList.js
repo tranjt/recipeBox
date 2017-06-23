@@ -12,10 +12,18 @@ class RecipeList extends Component {
     }
    
     renderRecipes() {                
+
+        if (!this.props.recipes) {
+            return (
+                <Panel collapsible header="No recipes" eventKey="No recipes" bsStyle="success" key="No recipes"  >                  
+                </Panel>
+            );
+        }
+
         return this.props.recipes.map(recipe => {
             return (
-                <Panel collapsible header={recipe.title} eventKey={recipe.title} bsStyle="success" key={recipe.title} >                        
-                    <ListGroup fill>
+                <Panel collapsible header={recipe.title} eventKey={recipe.title} bsStyle="success" key={recipe.title}  >                        
+                    <ListGroup >
                         {
                             recipe.ingredients.map(ingredient => {
                                 return (                                     
@@ -36,7 +44,8 @@ class RecipeList extends Component {
     render() {
         return (
             <div>
-                <Accordion>
+                <Accordion >
+                    <h2>Recipes</h2>
                    {this.renderRecipes.bind(this)()}
                 </Accordion>
             </div>

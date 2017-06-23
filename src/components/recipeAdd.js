@@ -34,11 +34,15 @@ class RecipeAdd extends Component {
     }
 
     handleSubmit(event) { 
-        event.preventDefault();       
+        event.preventDefault(); 
         this.props.addRecipe({
             id: new Date().valueOf(),
             title: this.state.title,
             ingredients: this.state.ingredients.split(",")
+        });
+        this.setState({
+            title: "",
+            ingredients:""
         });
         this.closeModal();
     }
