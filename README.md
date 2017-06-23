@@ -1,4 +1,4 @@
-#Simple recipe box app with react, redux and localstorage
+# Simple recipe box app with react, redux and localstorage
 
 
 * User Story: I can create recipes that have names and ingredients.
