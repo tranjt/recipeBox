@@ -3,7 +3,8 @@ import { ADD_RECIPES, ADD_RECIPE, EDIT_RECIPE, DELETE_RECIPE } from "../actions/
 
 const INITIAL_STATE = { recipes: [] };
 
-export default function(state = INITIAL_STATE, action) {
+export default function(state = INITIAL_STATE, action) {   
+
     switch(action.type) {
         case ADD_RECIPES: 
             return {                
@@ -13,7 +14,7 @@ export default function(state = INITIAL_STATE, action) {
             return  {
                 recipes: [...state.recipes, action.payload]
             };   
-        case EDIT_RECIPE:
+        case EDIT_RECIPE:        
             return {
                 recipes: state.recipes.map(recipe => {                    
                     if (recipe.id === action.payload.id) {
@@ -22,13 +23,16 @@ export default function(state = INITIAL_STATE, action) {
                     else return recipe;
                 })
             };
-        case DELETE_RECIPE:             
+        case DELETE_RECIPE:                         
             return {
-                recipe: state.recipes.filter(recipe => {
-                    return recipe.id !== action.payload.id                    
+                recipes: state.recipes.filter(recipe => {                    
+                    return recipe.id !== action.payload          
                 })
             };
         default:
             return state;
     }
 }
+
+
+  

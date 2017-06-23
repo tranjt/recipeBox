@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button, ButtonToolbar, FormGroup, FormControl, ControlLabel  } from "react-bootstrap";
 import { connect } from "react-redux";
-import { editRecipe } from "../actions/index";
+import { editRecipe, deleteRecipe } from "../actions/index";
 
 class RecipeEdit extends Component {
 
@@ -84,4 +84,4 @@ class RecipeEdit extends Component {
     }
 }
 
-export default connect(null, { editRecipe })(RecipeEdit);
+export default connect(null, { editRecipe, deleteRecipe })(RecipeEdit);

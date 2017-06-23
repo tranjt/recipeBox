@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Accordion, Panel, ListGroup, ListGroupItem, ButtonToolbar, Button  } from 'react-bootstrap';
 import { addRecipes } from "../actions/index";
 import RecipeEdit from "./recipeEdit";
+import RecipeDelete from "./recipeDelete";
 
 class RecipeList extends Component {
 
@@ -23,11 +24,9 @@ class RecipeList extends Component {
                             })
                         }
                     </ListGroup>
-                    <ButtonToolbar>       
-                        <Button bsStyle="danger">
-                            Delete
-                        </Button>                         
-                        <RecipeEdit recipe={recipe}/>
+                    <ButtonToolbar>                               
+                        <RecipeDelete recipeID={recipe.id} />                                          
+                        <RecipeEdit recipe={recipe} />
                     </ButtonToolbar>
                 </Panel>
             );

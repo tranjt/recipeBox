@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Modal, Button,ButtonToolbar,  FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { connect } from "react-redux";
+import { addRecipe } from "../actions/index";
 
 class RecipeAdd extends Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
-            showModal: false
+            showModal: false,
+            title: "",
+            ingerdients: ""
         };
     }
 
@@ -18,6 +20,29 @@ class RecipeAdd extends Component {
     openModal() {
          this.setState({ showModal: true });
     }
+
+    handleTitleEdit(event) {        
+        this.setState({
+            title: event.target.value
+        });
+    }
+
+    handleIngredientsEdit(event) {        
+        this.setState({
+            ingredients: event.target.value
+        });
+    }
+
+    handleSubmit(event) { 
+        event.preventDefault();       
+        this.props.addRecipe({
+            id: new Date().valueOf(),
+            title: this.state.title,
+            ingredients: this.state.ingredients.split(",")
+        });
+        this.closeModal();
+    }
+
     render(){
 
         return (
@@ -35,18 +60,22 @@ class RecipeAdd extends Component {
                         <Modal.Title>Create Recipe</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>                    
-                        <form> 
+                        <form onSubmit={this.handleSubmit.bind(this)}> 
                             <FormGroup  controlId="formBasicText" >
                                 <ControlLabel>Recipe</ControlLabel>
                                 <FormControl
                                     type="text"
                                     value={this.state.value}
                                     placeholder="Recipe Name"
-                                    onChange={this.handleChange}
+                                    onChange={this.handleTitleEdit.bind(this)}
                                 />                        
                                 <ControlLabel>Ingedients</ControlLabel>
-                                <FormControl componentClass="textarea" placeholder="Enter ingerdients separated by commas." />                        
-                            </FormGroup>
+                                <FormControl 
+                                    componentClass="textarea" 
+                                    placeholder="Enter ingerdients separated by commas." 
+                                    value={this.state.ingredients} 
+                                    onChange={this.handleIngredientsEdit.bind(this)}/>                         
+                                 </FormGroup>
                             <ButtonToolbar> 
                                 <Button onClick={this.closeModal.bind(this)} className="pull-right">Close</Button>  
                                 <Button type="submit" className="pull-right" bsStyle="primary"> Create</Button> 
@@ -60,4 +89,4 @@ class RecipeAdd extends Component {
     }
 }
 
-export default RecipeAdd;
+export default connect(null, { addRecipe })(RecipeAdd);
