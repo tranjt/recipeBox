@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button,ButtonToolbar,  FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 class RecipeAdd extends Component {
 
@@ -34,28 +34,30 @@ class RecipeAdd extends Component {
                     <Modal.Header closeButton>
                         <Modal.Title>Create Recipe</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
-                    
-                        <div>
-                            <label>Recipe</label>
-                            <input type="text" /> 
-                        <div>
-                        </div>
-                            <label>Ingedients</label>
-                            <textarea type="text"/> 
-                        </div>
-                        
+                    <Modal.Body>                    
+                        <form> 
+                            <FormGroup  controlId="formBasicText" >
+                                <ControlLabel>Recipe</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.value}
+                                    placeholder="Recipe Name"
+                                    onChange={this.handleChange}
+                                />                        
+                                <ControlLabel>Ingedients</ControlLabel>
+                                <FormControl componentClass="textarea" placeholder="Enter ingerdients separated by commas." />                        
+                            </FormGroup>
+                            <ButtonToolbar> 
+                                <Button onClick={this.closeModal.bind(this)} className="pull-right">Close</Button>  
+                                <Button type="submit" className="pull-right" bsStyle="primary"> Create</Button> 
+                            </ButtonToolbar>    
+                        </form>                                            
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.closeModal.bind(this)}>Close</Button>
-                    </Modal.Footer>
+                   
                 </Modal>
         </div>
       )
     }
 }
 
-
 export default RecipeAdd;
-
-

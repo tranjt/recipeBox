@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, ButtonToolbar } from "react-bootstrap";
+import { Modal, Button, ButtonToolbar, FormGroup, FormControl, ControlLabel  } from "react-bootstrap";
 
 class RecipeEdit extends Component {
 
@@ -44,41 +44,41 @@ class RecipeEdit extends Component {
     render(){        
         return (
             <div>
-                <Button
-                bsStyle="warning"                
-                onClick={this.openModal.bind(this)}
-                >
-                Edit
+                <Button bsStyle="warning" onClick={this.openModal.bind(this)}>
+                    Edit
                 </Button>
 
                 <Modal show={this.state.showModal} onHide={this.closeModal.bind(this)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Recipe</Modal.Title>                       
                     </Modal.Header>
-                    <Modal.Body>
-                        <form onSubmit={this.handleSubmit.bind(this)}>
-                            <div>                            
-                                <label>Recipe {this.props.recipe.id}</label>
-                                <input type="text" value={this.state.title} onChange={this.handleTitleEdit.bind(this)}/ > 
-                            <div>
-                            </div>
-                                <label>Ingedients</label>
-                                <textarea type="text" value={this.state.ingredients} onChange={this.handleIngredientsEdit.bind(this)}/>  
-                            </div>
-                            <ButtonToolbar>                                 
-                                <Button onClick={this.closeModal.bind(this)} className="pull-right">Close</Button>
-                                <Button type="submit" className="pull-right">Save</Button>
-                            </ButtonToolbar>
-                        </form>                        
+                    <Modal.Body>                     
+                        <form onSubmit={this.handleSubmit.bind(this)}> 
+                            <FormGroup  controlId="formBasicText" >
+                                <ControlLabel>Recipe</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.title}
+                                    placeholder="Recipe Name"
+                                    onChange={this.handleTitleEdit.bind(this)}
+                                />                        
+                                <ControlLabel>Ingedients</ControlLabel>
+                                <FormControl 
+                                    componentClass="textarea" 
+                                    placeholder="Enter ingerdients separated by commas." 
+                                    value={this.state.ingredients} 
+                                    onChange={this.handleIngredientsEdit.bind(this)}/>                        
+                                </FormGroup>
+                            <ButtonToolbar> 
+                                <Button onClick={this.closeModal.bind(this)} className="pull-right">Close</Button>  
+                                <Button type="submit" className="pull-right" bsStyle="primary"> Save</Button> 
+                            </ButtonToolbar>    
+                        </form>     
                     </Modal.Body>                   
                 </Modal>
         </div>
       )
     }
 }
-//do on change  controlled input
-//change to form?
-//do save
 
 export default RecipeEdit;
-
