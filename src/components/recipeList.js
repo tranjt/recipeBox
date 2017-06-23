@@ -12,10 +12,11 @@ class RecipeList extends Component {
     }
    
     renderRecipes() {                
-
-        if (!this.props.recipes) {
+        console.log(this.props.recipes)
+        if (this.props.recipes.length === 0) {
+            console.log("empty")
             return (
-                <Panel collapsible header="No recipes" eventKey="No recipes" bsStyle="success" key="No recipes"  >                  
+                <Panel  header="Recipe list is empty." bsStyle="success"  >                         
                 </Panel>
             );
         }

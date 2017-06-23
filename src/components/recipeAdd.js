@@ -3,6 +3,9 @@ import { Modal, Button,ButtonToolbar,  FormGroup, FormControl, ControlLabel } fr
 import { connect } from "react-redux";
 import { addRecipe } from "../actions/index";
 
+//Todo Form validation
+
+
 class RecipeAdd extends Component {
     constructor(props) {
         super(props);
